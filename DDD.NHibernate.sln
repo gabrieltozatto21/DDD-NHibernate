@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{2A5274F3-C949-4743-9854-088729BDC868}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.API", "DDD.NHibernate.API\DDD.NHibernate.API.csproj", "{7C2F9841-B8ED-470C-88F2-5A5C2E36268E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Aplicacao", "DDD.NHibernate.Aplicacao\DDD.NHibernate.Aplicacao.csproj", "{A2F48E8C-6E3C-40BB-AA3F-6A7C9D2BB34F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Dominio", "DDD.NHibernate.Dominio\DDD.NHibernate.Dominio.csproj", "{89E9F8F4-D011-4109-9790-A31CBD4F82A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Infra", "DDD.NHibernate.Infra\DDD.NHibernate.Infra.csproj", "{FEA28677-A8FC-4D96-B6F8-17B932C9BE4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Libs", "DDD.NHibernate.Lib\DDD.NHibernate.Libs.csproj", "{47000E42-3760-42BC-A318-3B418BB63EC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C2F9841-B8ED-470C-88F2-5A5C2E36268E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C2F9841-B8ED-470C-88F2-5A5C2E36268E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C2F9841-B8ED-470C-88F2-5A5C2E36268E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C2F9841-B8ED-470C-88F2-5A5C2E36268E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2F48E8C-6E3C-40BB-AA3F-6A7C9D2BB34F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2F48E8C-6E3C-40BB-AA3F-6A7C9D2BB34F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2F48E8C-6E3C-40BB-AA3F-6A7C9D2BB34F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2F48E8C-6E3C-40BB-AA3F-6A7C9D2BB34F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89E9F8F4-D011-4109-9790-A31CBD4F82A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89E9F8F4-D011-4109-9790-A31CBD4F82A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89E9F8F4-D011-4109-9790-A31CBD4F82A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89E9F8F4-D011-4109-9790-A31CBD4F82A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEA28677-A8FC-4D96-B6F8-17B932C9BE4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA28677-A8FC-4D96-B6F8-17B932C9BE4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEA28677-A8FC-4D96-B6F8-17B932C9BE4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA28677-A8FC-4D96-B6F8-17B932C9BE4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47000E42-3760-42BC-A318-3B418BB63EC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47000E42-3760-42BC-A318-3B418BB63EC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47000E42-3760-42BC-A318-3B418BB63EC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47000E42-3760-42BC-A318-3B418BB63EC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7C2F9841-B8ED-470C-88F2-5A5C2E36268E} = {2A5274F3-C949-4743-9854-088729BDC868}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4200EB03-CCCE-4519-B05C-CC25511BF4D8}
+	EndGlobalSection
+EndGlobal
