@@ -12,6 +12,12 @@ namespace DDD.NHibernate.Dominio.Despesas.Servicos
     public class DespesaServico : IDespesaServico
     {
         private readonly IDespesaRepositorio despesaRepositorio;
+
+        public DespesaServico(IDespesaRepositorio despesaRepositorio)
+        {
+            this.despesaRepositorio = despesaRepositorio;
+        }
+
         public Despesa Atualizar(int id, Despesa despesaAtualizada)
         {
             throw new NotImplementedException();
