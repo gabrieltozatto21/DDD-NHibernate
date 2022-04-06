@@ -1,6 +1,5 @@
 ﻿using DDD.NHibernate.Aplicacao.Despesas.Servicos;
 using DDD.NHibernate.Aplicacao.Despesas.Servicos.Interfaces;
-using DDD.NHibernate.Dominio.Despesas.Entidades;
 using DDD.NHibernate.Dominio.Despesas.Repositorios;
 using DDD.NHibernate.Dominio.Despesas.Servicos;
 using DDD.NHibernate.Dominio.Despesas.Servicos.Interfaces;
@@ -24,7 +23,7 @@ namespace DDD.NHibernate.API
     {
         public Startup(IConfiguration configuration)
         {
-            configuration = configuration;
+            this.configuration = configuration;
         }
 
         public IConfiguration configuration { get; }
@@ -37,7 +36,7 @@ namespace DDD.NHibernate.API
 
             services.AddSingleton<ISessionFactory>(factory =>
                 {
-                    string connectionString = "Server=localhost;Port=3306;Database=nhibernatedb;Uid=root;Pwd=Autoglass@2020;";
+                    string connectionString = configuration.GetConnectionString("mysql");
 
                     ISessionFactory sessionFactory = Fluently.Configure().Database(
                             MySQLConfiguration.Standard

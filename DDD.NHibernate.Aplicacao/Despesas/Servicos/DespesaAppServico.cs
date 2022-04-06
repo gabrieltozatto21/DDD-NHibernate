@@ -83,7 +83,10 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
 
         public Despesa Recuperar(int id)
         {
-            throw new NotImplementedException();
+            Despesa despesa = despesaServico.Validar(id);
+
+            return despesa;
+     
         }
     }
 }

@@ -38,16 +38,21 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         [Route("api/despesas/{id}")]
         public ActionResult ExcluirDespesa(int id)
         {
-            try
-            {
-                despesaAppServico.Excluir(id);
+            
+            despesaAppServico.Excluir(id);
 
-                return Ok();
-            }
-            catch(Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return Ok();
+            
+        }
+        [HttpGet]
+        [Route("api/despesas/{id}")]
+        public ActionResult PesquisarDespesa(int id)
+        {
+
+            var resultado = despesaAppServico.Recuperar(id);
+
+            return Ok(resultado);
+
         }
     }
 }
