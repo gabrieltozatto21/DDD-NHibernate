@@ -1,6 +1,7 @@
 ﻿using DDD.NHibernate.Dominio.Despesas.Entidades;
 using DDD.NHibernate.Dominio.Despesas.Repositorios;
 using DDD.NHibernate.Dominio.Despesas.Servicos.Interfaces;
+using DDD.NHibernate.Libs.Dominio.Excecoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,7 @@ namespace DDD.NHibernate.Dominio.Despesas.Servicos
 
             if(despesa == null)
             {
-                throw new Exception("Despesa não encontrada");
+                throw new RegraDeNegocioExcecao("Despesa não encontrada!");
             }
 
             return despesa;

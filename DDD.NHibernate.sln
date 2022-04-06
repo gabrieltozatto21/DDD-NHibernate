@@ -7,13 +7,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{2A5274F3-C94
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.API", "DDD.NHibernate.API\DDD.NHibernate.API.csproj", "{7C2F9841-B8ED-470C-88F2-5A5C2E36268E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Aplicacao", "DDD.NHibernate.Aplicacao\DDD.NHibernate.Aplicacao.csproj", "{A2F48E8C-6E3C-40BB-AA3F-6A7C9D2BB34F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Aplicacao", "DDD.NHibernate.Aplicacao\DDD.NHibernate.Aplicacao.csproj", "{A2F48E8C-6E3C-40BB-AA3F-6A7C9D2BB34F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Dominio", "DDD.NHibernate.Dominio\DDD.NHibernate.Dominio.csproj", "{89E9F8F4-D011-4109-9790-A31CBD4F82A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Dominio", "DDD.NHibernate.Dominio\DDD.NHibernate.Dominio.csproj", "{89E9F8F4-D011-4109-9790-A31CBD4F82A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Infra", "DDD.NHibernate.Infra\DDD.NHibernate.Infra.csproj", "{FEA28677-A8FC-4D96-B6F8-17B932C9BE4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Infra", "DDD.NHibernate.Infra\DDD.NHibernate.Infra.csproj", "{FEA28677-A8FC-4D96-B6F8-17B932C9BE4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Libs", "DDD.NHibernate.Lib\DDD.NHibernate.Libs.csproj", "{47000E42-3760-42BC-A318-3B418BB63EC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Libs", "DDD.NHibernate.Lib\DDD.NHibernate.Libs.csproj", "{47000E42-3760-42BC-A318-3B418BB63EC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

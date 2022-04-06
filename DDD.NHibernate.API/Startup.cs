@@ -6,6 +6,7 @@ using DDD.NHibernate.Dominio.Despesas.Servicos.Interfaces;
 using DDD.NHibernate.Infra.Despesas.Mapeamentos;
 using DDD.NHibernate.Infra.Despesas.Repositorios;
 using DDD.NHibernate.Libs.Aplicacao.Transacoes.Interfaces;
+using DDD.NHibernate.Libs.Core.Api.Swagger;
 using DDD.NHibernate.Libs.NHibernate.Transacoes;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -15,15 +16,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate;
-using NHibernate.Tool.hbm2ddl;
+using System;
+using System.IO;
+using System.Reflection;
+using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Rewrite;
+using DDD.NHibernate.Libs.Core.Api.Filters;
 
 namespace DDD.NHibernate.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             this.configuration = configuration;
+            this.env = env;
         }
 
         public IConfiguration configuration { get; }
@@ -32,7 +39,20 @@ namespace DDD.NHibernate.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddMvc(config => {
+                config.Filters.Add<ExcecaoFilter>();
+            })
+            .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DDD.NHibernate.API", Version = "v1" });
+
+                c.OperationFilter<DefaultOperationFilter>();
+                //c.DescribeAllEnumsAsStrings();
+
+            });
 
             services.AddSingleton<ISessionFactory>(factory =>
                 {
@@ -71,14 +91,29 @@ namespace DDD.NHibernate.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+
+            app.UseCors(c =>
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+                c.AllowAnyHeader();
+                c.AllowAnyMethod();
+                c.AllowAnyOrigin();
+            });
+
+            app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("../swagger/v1/swagger.json", "DDD.NHibernate.API-" + env.EnvironmentName);
+                c.DisplayRequestDuration();
+            });
+
+            var option = new RewriteOptions();
+            option.AddRedirect("^$", "swagger");
+
+            app.UseRewriter(option);
 
             app.UseHttpsRedirection();
-            app.UseMvc();
         }
     }
 }

@@ -16,7 +16,10 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         {
             this.despesaAppServico = despesaAppServico;
         }
-
+        /// <summary>
+        /// Listar Despesas.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/despesas")]
         public ActionResult<List<Despesa>> ListarDespesa()
@@ -26,6 +29,10 @@ namespace DDD.NHibernate.API.Controllers.Despesas
             return Ok(response);
         }
 
+        /// <summary>
+        /// Adiciona Despesa.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [Route("api/despesas")]
         public ActionResult<Despesa> CadastrarDespesa([FromBody] Despesa request)
@@ -34,6 +41,12 @@ namespace DDD.NHibernate.API.Controllers.Despesas
 
             return Ok(response);
         }
+
+        /// <summary>
+        /// Deleta uma despesa específica.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete]
         [Route("api/despesas/{id}")]
         public ActionResult ExcluirDespesa(int id)
@@ -44,6 +57,11 @@ namespace DDD.NHibernate.API.Controllers.Despesas
             return Ok();
             
         }
+        /// <summary>
+        /// Retorna uma despesa especifica.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/despesas/{id}")]
         public ActionResult PesquisarDespesa(int id)
