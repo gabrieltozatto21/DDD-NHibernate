@@ -1,4 +1,5 @@
 ﻿using DDD.NHibernate.Dominio.Despesas.Entidades;
+using DDD.NHibernate.Dominio.Despesas.Entidades.Enumeradores;
 using DDD.NHibernate.Dominio.Despesas.Repositorios;
 using DDD.NHibernate.Dominio.Despesas.Servicos.Interfaces;
 using DDD.NHibernate.Libs.Dominio.Excecoes;
@@ -21,12 +22,20 @@ namespace DDD.NHibernate.Dominio.Despesas.Servicos
 
         public Despesa Atualizar(int id, Despesa despesaAtualizada)
         {
-            throw new NotImplementedException();
+            Despesa despesa = Validar(id);
+
+            despesa.SetDescricao(despesaAtualizada.Descricao);
+            despesa.SetValorTotal(despesaAtualizada.ValorTotal);
+            despesa.SetNumPagamentos(despesaAtualizada.NumPagamentos);
+
+            return despesa;
         }
 
-        public Despesa Instanciar(int idDespesa)
+        public Despesa Instanciar(string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal)
         {
-            throw new NotImplementedException();
+            Despesa despesa = new Despesa(descricao, tipo, numPagamentos, valorTotal);
+
+            return despesa;
         }
 
         public Despesa Validar(int idDespesa)

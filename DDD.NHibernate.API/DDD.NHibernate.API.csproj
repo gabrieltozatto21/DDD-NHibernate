@@ -5,17 +5,27 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <DocumentationFile>bin\Release\netcoreapp2.2\DDD.NHibernate.API.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Scan" Version="1.0.1" />
     <PackageReference Include="MySql.Data" Version="8.0.28" />
-    <PackageReference Include="NHibernate.Driver.MySqlConnector" Version="2.0.0" />
+    <PackageReference Include="Scrutor" Version="3.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.3.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DDD.NHibernate.Aplicacao\DDD.NHibernate.Aplicacao.csproj" />
+    <ProjectReference Include="..\DDD.NHibernate.DataTransfer\DDD.NHibernate.DataTransfer.csproj" />
     <ProjectReference Include="..\DDD.NHibernate.Infra\DDD.NHibernate.Infra.csproj" />
   </ItemGroup>
 

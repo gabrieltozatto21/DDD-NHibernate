@@ -1,4 +1,7 @@
-﻿using DDD.NHibernate.Aplicacao.Despesas.Servicos.Interfaces;
+﻿using AutoMapper;
+using DDD.NHibernate.Aplicacao.Despesas.Servicos.Interfaces;
+using DDD.NHibernate.DataTransfer.Despesas.Request;
+using DDD.NHibernate.DataTransfer.Despesas.Response;
 using DDD.NHibernate.Dominio.Despesas.Entidades;
 using DDD.NHibernate.Dominio.Despesas.Repositorios;
 using DDD.NHibernate.Dominio.Despesas.Servicos.Interfaces;
@@ -13,6 +16,7 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
 {
     public class DespesaAppServico : IDespesaAppServico
     {
+        private readonly IMapper mapper;
         private readonly IDespesaServico despesaServico;
         private readonly IDespesaRepositorio despesaRepositorio;
         private readonly IUnitOfWork unitOfWork;
@@ -20,31 +24,37 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
         public DespesaAppServico(
             IDespesaServico despesaServico, 
             IDespesaRepositorio despesaRepositorio, 
-            IUnitOfWork unitOfWork
+            IUnitOfWork unitOfWork,
+            IMapper mapper
         )
         {
+            this.mapper = mapper;
             this.unitOfWork = unitOfWork;
             this.despesaServico = despesaServico;
             this.despesaRepositorio = despesaRepositorio;
         }
-        public IEnumerable<Despesa> Listar()
+        public IEnumerable<DespesaResponse> Listar()
         {
             var query = despesaRepositorio.ListarTodos();
 
             List<Despesa> resultado = query.ToList();
 
-            return resultado;
+            var response = mapper.Map<List<DespesaResponse>>(resultado);
+
+            return response;
         }
 
-        public Despesa Inserir(Despesa request)
+        public DespesaResponse Inserir(DespesaInserirRequest request)
         {
             try
             {
                 unitOfWork.BeginTransaction();
 
-                despesaRepositorio.Adicionar(request);
+                Despesa despesa = despesaServico.Instanciar(request.Descricao, request.Tipo, request.NumPagamentos, request.ValorTotal);
 
-                var response = new Despesa(request.Id, request.Descricao, request.Tipo, request.NumPagamentos, request.ValorTotal);
+                despesaRepositorio.Adicionar(despesa);
+
+                var response = mapper.Map<DespesaResponse>(despesa);
 
                 unitOfWork.Commit();
 
@@ -57,9 +67,29 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
                 throw;
             }
         }
-        public Despesa Editar(int id, Despesa request)
+        public DespesaResponse Editar(int id, Despesa request)
         {
-            throw new NotImplementedException();
+            try
+            {
+                unitOfWork.BeginTransaction();
+
+                Despesa despesa = despesaServico.Atualizar(id, request);
+
+                despesaRepositorio.Editar(despesa);
+
+                DespesaResponse resultado = mapper.Map<DespesaResponse>(despesa);
+
+                unitOfWork.Commit();
+
+                return resultado;
+
+            }
+            catch
+            {
+                unitOfWork.Rollback();
+
+                throw;
+            }
         }
 
         public void Excluir(int id)
@@ -81,11 +111,13 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
             }
         }
 
-        public Despesa Recuperar(int id)
+        public DespesaResponse Recuperar(int id)
         {
             Despesa despesa = despesaServico.Validar(id);
 
-            return despesa;
+            var resultado = mapper.Map<DespesaResponse>(despesa);
+
+            return resultado;
      
         }
     }

@@ -1,8 +1,5 @@
 ﻿using DDD.NHibernate.Aplicacao.Despesas.Servicos;
-using DDD.NHibernate.Aplicacao.Despesas.Servicos.Interfaces;
-using DDD.NHibernate.Dominio.Despesas.Repositorios;
 using DDD.NHibernate.Dominio.Despesas.Servicos;
-using DDD.NHibernate.Dominio.Despesas.Servicos.Interfaces;
 using DDD.NHibernate.Infra.Despesas.Mapeamentos;
 using DDD.NHibernate.Infra.Despesas.Repositorios;
 using DDD.NHibernate.Libs.Aplicacao.Transacoes.Interfaces;
@@ -15,27 +12,43 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NHibernate;
 using System;
+using NHibernate;
 using System.IO;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Rewrite;
 using DDD.NHibernate.Libs.Core.Api.Filters;
+using DDD.NHibernate.Aplicacao.Despesas.Profiles;
+using AutoMapper;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace DDD.NHibernate.API
 {
+    /// <summary>
+    /// Classe Startup
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Construtor Startup
+        /// </summary>
+        /// <param name="configuration"></param>
+        /// <param name="env"></param>
         public Startup(IConfiguration configuration, IHostingEnvironment env)
         {
             this.configuration = configuration;
             this.env = env;
         }
 
-        public IConfiguration configuration { get; }
-        private readonly IHostingEnvironment env;
+        private IConfiguration configuration { get; }
+        private  IHostingEnvironment env { get; }
 
+        /// <summary>
+        /// Configuração de serviços
+        /// </summary>
+        /// <param name="services"></param>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -49,8 +62,12 @@ namespace DDD.NHibernate.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DDD.NHibernate.API", Version = "v1" });
 
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+
+                c.IncludeXmlComments(xmlPath);
                 c.OperationFilter<DefaultOperationFilter>();
-                //c.DescribeAllEnumsAsStrings();
+                c.UseInlineDefinitionsForEnums();
 
             });
 
@@ -78,15 +95,33 @@ namespace DDD.NHibernate.API
                 }
             );
 
+            services.AddAutoMapper(typeof(DespesaProfile).GetTypeInfo().Assembly);
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IDespesaAppServico, DespesaAppServico>();
-            services.AddScoped<IDespesaServico, DespesaServico>();
-            services.AddScoped<IDespesaRepositorio, DespesaRepositorio>();
+
+            services.Scan(scan => scan
+                .FromAssemblyOf<DespesaAppServico>()
+                    .AddClasses()
+                        .AsImplementedInterfaces()
+                        .WithScopedLifetime());
+
+            services.Scan(scan => scan
+                .FromAssemblyOf<DespesaServico>()
+                    .AddClasses()
+                        .AsImplementedInterfaces()
+                        .WithScopedLifetime());
+
+            services.Scan(scan => scan
+                .FromAssemblyOf<DespesaRepositorio>()
+                    .AddClasses()
+                        .AsImplementedInterfaces()
+                        .WithScopedLifetime());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Microsoft.Extensions.Logging.ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddSerilog();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

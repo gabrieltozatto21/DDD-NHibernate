@@ -1,4 +1,6 @@
 ﻿using DDD.NHibernate.Aplicacao.Despesas.Servicos.Interfaces;
+using DDD.NHibernate.DataTransfer.Despesas.Request;
+using DDD.NHibernate.DataTransfer.Despesas.Response;
 using DDD.NHibernate.Dominio.Despesas.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,7 +24,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <returns></returns>
         [HttpGet]
         [Route("api/despesas")]
-        public ActionResult<List<Despesa>> ListarDespesa()
+        public ActionResult<List<DespesaResponse>> ListarDespesa()
         {
             var response = despesaAppServico.Listar();
 
@@ -35,7 +37,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <returns></returns>
         [HttpPost]
         [Route("api/despesas")]
-        public ActionResult<Despesa> CadastrarDespesa([FromBody] Despesa request)
+        public ActionResult<Despesa> CadastrarDespesa([FromBody] DespesaInserirRequest request)
         {
             var response = despesaAppServico.Inserir(request);
 
@@ -64,13 +66,28 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <returns></returns>
         [HttpGet]
         [Route("api/despesas/{id}")]
-        public ActionResult PesquisarDespesa(int id)
+        public ActionResult<DespesaResponse> PesquisarDespesa(int id)
         {
 
             var resultado = despesaAppServico.Recuperar(id);
 
             return Ok(resultado);
 
+        }
+
+        /// <summary>
+        /// Editar uma Despesa
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("api/despesas/{id}")]
+        public ActionResult Editar(int id, [FromBody] Despesa request)
+        {
+            var response = despesaAppServico.Editar(id, request);
+
+            return Ok(response);
         }
     }
 }

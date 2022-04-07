@@ -1,4 +1,6 @@
-﻿using DDD.NHibernate.Dominio.Despesas.Entidades;
+﻿using DDD.NHibernate.DataTransfer.Despesas.Request;
+using DDD.NHibernate.DataTransfer.Despesas.Response;
+using DDD.NHibernate.Dominio.Despesas.Entidades;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,10 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos.Interfaces
 {
     public interface IDespesaAppServico
     {
-        IEnumerable<Despesa> Listar();
-        Despesa Recuperar(int id);
-        Despesa Inserir(Despesa request);
-        Despesa Editar(int id, Despesa request);
+        IEnumerable<DespesaResponse> Listar();
+        DespesaResponse Recuperar(int id);
+        DespesaResponse Inserir(DespesaInserirRequest request);
+        DespesaResponse Editar(int id, Despesa request);
         void Excluir(int id);
     }
 }

@@ -13,6 +13,7 @@ namespace DDD.NHibernate.Dominio.Libs.Repositorios
         IQueryable<T> ListarTodos(int index, int count);
         T PesquisarPor(int id);
         void Adicionar(T entity);
+        void Editar(T entidade);
         void Remover(T entity);
     }
 }

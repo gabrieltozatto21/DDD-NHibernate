@@ -31,12 +31,15 @@ namespace DDD.NHibernate.Lib.NHibernate.Repositorios
         }
         public T PesquisarPor(int id)
         {
-            T teste = session.Get<T>(id);
-            return teste;
+            return session.Get<T>(id);
         }
         public void Remover(T entity)
         {
             session.Delete(entity);
+        }
+        public void Editar(T entidade)
+        {
+            session.Update(entidade);
         }
     }
 }
