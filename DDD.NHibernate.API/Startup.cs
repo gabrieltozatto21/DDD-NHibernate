@@ -1,28 +1,28 @@
-﻿using DDD.NHibernate.Aplicacao.Despesas.Servicos;
+﻿using AutoMapper;
+using DDD.NHibernate.Aplicacao.Despesas.Profiles;
+using DDD.NHibernate.Aplicacao.Despesas.Servicos;
 using DDD.NHibernate.Dominio.Despesas.Servicos;
 using DDD.NHibernate.Infra.Despesas.Mapeamentos;
 using DDD.NHibernate.Infra.Despesas.Repositorios;
 using DDD.NHibernate.Libs.Aplicacao.Transacoes.Interfaces;
+using DDD.NHibernate.Libs.Core.Api.Filters;
 using DDD.NHibernate.Libs.Core.Api.Swagger;
+using Swashbuckle.AspNetCore.Swagger;
 using DDD.NHibernate.Libs.NHibernate.Transacoes;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Microsoft.OpenApi.Models;
 using NHibernate;
+using Serilog;
+using System;
 using System.IO;
 using System.Reflection;
-using Microsoft.OpenApi.Models;
-using Microsoft.AspNetCore.Rewrite;
-using DDD.NHibernate.Libs.Core.Api.Filters;
-using DDD.NHibernate.Aplicacao.Despesas.Profiles;
-using AutoMapper;
-using Microsoft.Extensions.Logging;
-using Serilog;
 
 namespace DDD.NHibernate.API
 {
@@ -43,7 +43,7 @@ namespace DDD.NHibernate.API
         }
 
         private IConfiguration configuration { get; }
-        private  IHostingEnvironment env { get; }
+        private IHostingEnvironment env { get; }
 
         /// <summary>
         /// Configuração de serviços
@@ -53,7 +53,8 @@ namespace DDD.NHibernate.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddMvc(config => {
+            services.AddMvc(config =>
+            {
                 config.Filters.Add<ExcecaoFilter>();
             })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -68,7 +69,6 @@ namespace DDD.NHibernate.API
                 c.IncludeXmlComments(xmlPath);
                 c.OperationFilter<DefaultOperationFilter>();
                 c.UseInlineDefinitionsForEnums();
-
             });
 
             services.AddSingleton<ISessionFactory>(factory =>
@@ -95,8 +95,9 @@ namespace DDD.NHibernate.API
                 }
             );
 
-            services.AddAutoMapper(typeof(DespesaProfile).GetTypeInfo().Assembly);
+           
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(typeof(DespesaProfile).GetTypeInfo().Assembly);
 
             services.Scan(scan => scan
                 .FromAssemblyOf<DespesaAppServico>()

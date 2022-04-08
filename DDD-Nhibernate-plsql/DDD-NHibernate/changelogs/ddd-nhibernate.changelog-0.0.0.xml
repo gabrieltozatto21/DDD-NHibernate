@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+  <changeSet author="liquibase-deploy" id="0.0.0">
+    <tagDatabase tag="0.0.0"/>
+  </changeSet>
+
+  <changeSet author="gabriel.tozatto" id="">
+    <comment>RELEASE 0.0.0</comment>
+    <sqlFile relativeToChangelogFile="false" dbms="mysql" encoding="utf8" path="scripts/0.0.0/script-01.sql" />
+    <rollback>
+        <sqlFile relativeToChangelogFile="false" dbms="mysql" encoding="utf8" path="scripts/0.0.0/script-01-rollback.sql" />
+    </rollback>
+  </changeSet>
+</databaseChangeLog>

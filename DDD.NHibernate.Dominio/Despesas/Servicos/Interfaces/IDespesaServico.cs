@@ -12,6 +12,6 @@ namespace DDD.NHibernate.Dominio.Despesas.Servicos.Interfaces
     {
         Despesa Validar(int idDespesa);
         Despesa Instanciar(string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal);
-        Despesa Atualizar(int id, Despesa despesaAtualizada);
+        Despesa Atualizar(int id, string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal);
     }
 }

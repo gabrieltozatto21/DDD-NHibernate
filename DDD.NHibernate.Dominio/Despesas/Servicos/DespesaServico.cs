@@ -20,13 +20,14 @@ namespace DDD.NHibernate.Dominio.Despesas.Servicos
             this.despesaRepositorio = despesaRepositorio;
         }
 
-        public Despesa Atualizar(int id, Despesa despesaAtualizada)
+        public Despesa Atualizar(int id, string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal)
         {
             Despesa despesa = Validar(id);
 
-            despesa.SetDescricao(despesaAtualizada.Descricao);
-            despesa.SetValorTotal(despesaAtualizada.ValorTotal);
-            despesa.SetNumPagamentos(despesaAtualizada.NumPagamentos);
+            despesa.SetDescricao(descricao);
+            despesa.SetTipo(tipo);
+            despesa.SetNumPagamentos(numPagamentos);
+            despesa.SetValorTotal(valorTotal);
 
             return despesa;
         }

@@ -83,7 +83,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <returns></returns>
         [HttpPut]
         [Route("api/despesas/{id}")]
-        public ActionResult Editar(int id, [FromBody] Despesa request)
+        public ActionResult Editar(int id, [FromBody] DespesaEditarRequest request)
         {
             var response = despesaAppServico.Editar(id, request);
 

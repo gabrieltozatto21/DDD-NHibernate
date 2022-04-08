@@ -14,7 +14,7 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos.Interfaces
         IEnumerable<DespesaResponse> Listar();
         DespesaResponse Recuperar(int id);
         DespesaResponse Inserir(DespesaInserirRequest request);
-        DespesaResponse Editar(int id, Despesa request);
+        DespesaResponse Editar(int id, DespesaEditarRequest request);
         void Excluir(int id);
     }
 }

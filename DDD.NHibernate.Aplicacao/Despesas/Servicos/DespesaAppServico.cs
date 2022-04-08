@@ -67,13 +67,13 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
                 throw;
             }
         }
-        public DespesaResponse Editar(int id, Despesa request)
+        public DespesaResponse Editar(int id, DespesaEditarRequest request)
         {
             try
             {
                 unitOfWork.BeginTransaction();
 
-                Despesa despesa = despesaServico.Atualizar(id, request);
+                Despesa despesa = despesaServico.Atualizar(id, request.Descricao, request.Tipo, request.NumPagamentos, request.ValorTotal);
 
                 despesaRepositorio.Editar(despesa);
 

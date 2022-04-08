@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Infra", "DDD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Libs", "DDD.NHibernate.Lib\DDD.NHibernate.Libs.csproj", "{47000E42-3760-42BC-A318-3B418BB63EC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.DataTransfer", "DDD.NHibernate.DataTransfer\DDD.NHibernate.DataTransfer.csproj", "{03D19C9D-59EF-42C3-A564-1AFFF07EB83F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.DataTransfer", "DDD.NHibernate.DataTransfer\DDD.NHibernate.DataTransfer.csproj", "{03D19C9D-59EF-42C3-A564-1AFFF07EB83F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
