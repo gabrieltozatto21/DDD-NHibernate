@@ -1,4 +1,5 @@
-﻿using DDD.NHibernate.Dominio.Despesas.Entidades.Enumeradores;
+﻿using System;
+using DDD.NHibernate.Dominio.Despesas.Entidades.Enumeradores;
 using DDD.NHibernate.Libs.Dominio.Excecoes;
 
 namespace DDD.NHibernate.Dominio.Despesas.Entidades
@@ -22,7 +23,11 @@ namespace DDD.NHibernate.Dominio.Despesas.Entidades
 
         public virtual void SetDescricao(string descricao)
         {
-            this.Descricao = descricao ?? throw new AtributoObrigatorioExcecao(nameof(this.Descricao));
+            if (string.IsNullOrEmpty(descricao))
+            {
+                throw new AtributoObrigatorioExcecao(nameof(this.Descricao));
+            }
+            this.Descricao = descricao;
         }
 
         public virtual void SetTipo(TipoDespesaEnum tipo)

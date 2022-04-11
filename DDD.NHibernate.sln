@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Libs", "DDD.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.DataTransfer", "DDD.NHibernate.DataTransfer\DDD.NHibernate.DataTransfer.csproj", "{03D19C9D-59EF-42C3-A564-1AFFF07EB83F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teste", "Teste", "{CFBA70ED-3246-4F5F-9B3D-598831FB43C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Dominio.Testes", "DDD.NHibernate.Dominio.Testes\DDD.NHibernate.Dominio.Testes.csproj", "{509D9403-A24B-4872-AACA-3FE706E8DEFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,12 +51,17 @@ Global
 		{03D19C9D-59EF-42C3-A564-1AFFF07EB83F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D19C9D-59EF-42C3-A564-1AFFF07EB83F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03D19C9D-59EF-42C3-A564-1AFFF07EB83F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{509D9403-A24B-4872-AACA-3FE706E8DEFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{509D9403-A24B-4872-AACA-3FE706E8DEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{509D9403-A24B-4872-AACA-3FE706E8DEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{509D9403-A24B-4872-AACA-3FE706E8DEFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7C2F9841-B8ED-470C-88F2-5A5C2E36268E} = {2A5274F3-C949-4743-9854-088729BDC868}
+		{509D9403-A24B-4872-AACA-3FE706E8DEFA} = {CFBA70ED-3246-4F5F-9B3D-598831FB43C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4200EB03-CCCE-4519-B05C-CC25511BF4D8}
