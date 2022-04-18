@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace DDD.NHibernate.API.Controllers.Despesas
 {
+    [Route("api/despesas")]
     [ApiController]
     public class DespesasController : ControllerBase
     {
@@ -23,7 +24,6 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Route("api/despesas")]
         public ActionResult<List<DespesaResponse>> ListarDespesa()
         {
             var response = despesaAppServico.Listar();
@@ -36,7 +36,6 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Route("api/despesas")]
         public ActionResult<Despesa> CadastrarDespesa([FromBody] DespesaInserirRequest request)
         {
             var response = despesaAppServico.Inserir(request);
@@ -49,8 +48,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete]
-        [Route("api/despesas/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult ExcluirDespesa(int id)
         {
             
@@ -64,8 +62,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("api/despesas/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<DespesaResponse> PesquisarDespesa(int id)
         {
 
@@ -81,8 +78,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <param name="id"></param>
         /// <param name="request"></param>
         /// <returns></returns>
-        [HttpPut]
-        [Route("api/despesas/{id}")]
+        [HttpPut("{id}")]
         public ActionResult Editar(int id, [FromBody] DespesaEditarRequest request)
         {
             var response = despesaAppServico.Editar(id, request);
