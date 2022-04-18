@@ -8,4 +8,9 @@
     <ProjectReference Include="..\DDD.NHibernate.Lib\DDD.NHibernate.Libs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UsuariosAcesso\Servicos\" />
+    <Folder Include="UsuariosAcesso\Repositorios\" />
+  </ItemGroup>
+
 </Project>
