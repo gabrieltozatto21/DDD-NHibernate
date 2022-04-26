@@ -6,6 +6,10 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{2A5274F3-C949-4743-9854-088729BDC868}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.API", "DDD.NHibernate.API\DDD.NHibernate.API.csproj", "{7C2F9841-B8ED-470C-88F2-5A5C2E36268E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{47000E42-3760-42BC-A318-3B418BB63EC4} = {47000E42-3760-42BC-A318-3B418BB63EC4}
+		{89E9F8F4-D011-4109-9790-A31CBD4F82A0} = {89E9F8F4-D011-4109-9790-A31CBD4F82A0}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Aplicacao", "DDD.NHibernate.Aplicacao\DDD.NHibernate.Aplicacao.csproj", "{A2F48E8C-6E3C-40BB-AA3F-6A7C9D2BB34F}"
 EndProject
@@ -19,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.DataTransfer
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teste", "Teste", "{CFBA70ED-3246-4F5F-9B3D-598831FB43C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.NHibernate.Dominio.Testes", "DDD.NHibernate.Dominio.Testes\DDD.NHibernate.Dominio.Testes.csproj", "{509D9403-A24B-4872-AACA-3FE706E8DEFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Dominio.Testes", "DDD.NHibernate.Dominio.Testes\DDD.NHibernate.Dominio.Testes.csproj", "{509D9403-A24B-4872-AACA-3FE706E8DEFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

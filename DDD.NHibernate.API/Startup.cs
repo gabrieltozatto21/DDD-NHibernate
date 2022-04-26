@@ -23,6 +23,10 @@ using Serilog;
 using System;
 using System.IO;
 using System.Reflection;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace DDD.NHibernate.API
 {
@@ -68,8 +72,44 @@ namespace DDD.NHibernate.API
 
                 c.IncludeXmlComments(xmlPath);
                 c.OperationFilter<DefaultOperationFilter>();
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    In = ParameterLocation.Header,
+                    Scheme = "Bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                          {
+                              Reference = new OpenApiReference
+                              {
+                                  Type = ReferenceType.SecurityScheme,
+                                  Id = "Bearer"
+                              }
+                          },
+                         new string[] {}
+                    }
+                });
                 c.UseInlineDefinitionsForEnums();
             });
+
+            services
+                .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(opts =>
+                {
+                    opts.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Secret"])),
+                        ClockSkew = TimeSpan.Zero
+                    };
+                });
 
             services.AddSingleton<ISessionFactory>(factory =>
                 {
@@ -134,6 +174,13 @@ namespace DDD.NHibernate.API
                 c.AllowAnyMethod();
                 c.AllowAnyOrigin();
             });
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All
+            });
+
+            app.UseAuthentication();
 
             app.UseMvc();
 

@@ -33,7 +33,7 @@ namespace DDD.NHibernate.Libs.Core.Api.Swagger
                     Name = "Token_Autorizacao",
                     In = ParameterLocation.Header,
                     Schema = myObjectSchema,
-                    Required = true
+                    Required = false
                 });
             }
         }

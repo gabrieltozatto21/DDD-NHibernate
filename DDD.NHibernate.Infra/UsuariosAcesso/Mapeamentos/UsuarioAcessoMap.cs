@@ -7,7 +7,7 @@ namespace DDD.NHibernate.Infra.UsuariosAcesso.Mapeamentos
     {
         public UsuarioAcessoMap()
         {
-            Table("NHIBERNATEDB.USUARIOACESSO");
+            Table("USUARIOACESSO");
             Id(p => p.Id).Column("ID");
             Map(p => p.Nome).Column("NOME");
             Map(p => p.Login).Column("LOGIN");

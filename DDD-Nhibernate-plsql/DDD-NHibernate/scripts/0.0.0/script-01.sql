@@ -16,3 +16,14 @@ CREATE TABLE despesa (
     ValorTotal double NOT NULL,
     PRIMARY KEY (Id)
 );
+
+CREATE TABLE usuarioacesso (
+    Id int NOT NULL AUTO_INCREMENT,
+    Nome varchar(255) NOT NULL,
+    Email varchar(255) NOT NULL,
+    Senha varchar(255) NOT NULL,
+    Login varchar(255) NOT NULL,
+    DataCadastro DateTime,
+    PRIMARY KEY (Id)
+);
+

@@ -13,6 +13,17 @@ namespace DDD.NHibernate.Dominio.UsuariosAcesso.Entidades
         public virtual string Login { get; protected set; }
         public virtual DateTime DataCadastro { get; protected set; }
 
+        public UsuarioAcesso() { }
+        public UsuarioAcesso(string nome, string email, string login)
+        {
+            Nome = nome;
+            Email = email;
+            Login = login;
+        }
 
+        public virtual void SetSenha(string senha)
+        {
+            this.Senha = senha;
+        }
     }
 }

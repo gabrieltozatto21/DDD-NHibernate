@@ -2,6 +2,7 @@
 using DDD.NHibernate.DataTransfer.Despesas.Request;
 using DDD.NHibernate.DataTransfer.Despesas.Response;
 using DDD.NHibernate.Dominio.Despesas.Entidades;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -36,6 +37,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [Authorize]
         public ActionResult<Despesa> CadastrarDespesa([FromBody] DespesaInserirRequest request)
         {
             var response = despesaAppServico.Inserir(request);
@@ -49,6 +51,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [Authorize]
         public ActionResult ExcluirDespesa(int id)
         {
             
@@ -63,6 +66,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
+        [Authorize]
         public ActionResult<DespesaResponse> PesquisarDespesa(int id)
         {
 
@@ -79,6 +83,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize]
         public ActionResult Editar(int id, [FromBody] DespesaEditarRequest request)
         {
             var response = despesaAppServico.Editar(id, request);
