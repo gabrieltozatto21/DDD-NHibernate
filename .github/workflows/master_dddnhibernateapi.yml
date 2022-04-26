@@ -19,7 +19,7 @@ jobs:
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '2.2.300'
+          dotnet-version: '2.2.207'
           include-prerelease: true
 
       - name: Build with dotnet
