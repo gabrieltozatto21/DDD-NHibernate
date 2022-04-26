@@ -66,7 +66,6 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        [Authorize]
         public ActionResult<DespesaResponse> PesquisarDespesa(int id)
         {
 
