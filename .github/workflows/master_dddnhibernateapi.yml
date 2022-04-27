@@ -54,4 +54,4 @@ jobs:
           app-name: 'DDDNHibernateAPI'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9E9DA6BFD74A4E41831992FEA799A888 }}
-          package: ./DDD.NHibernate.API
+          package: .
