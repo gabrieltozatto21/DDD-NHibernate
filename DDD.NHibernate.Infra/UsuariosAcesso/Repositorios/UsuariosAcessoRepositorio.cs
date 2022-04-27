@@ -28,7 +28,7 @@ namespace DDD.NHibernate.Infra.UsuariosAcesso.Repositorios
 
         public string GerarTokenJwt(SessaoAcesso sessao)
         {
-            string secret = configuracao.GetSection("Jwt:Secret").Value;
+            string secret = configuracao.GetSection("Secret").Value;
 
             string id = sessao.Codigo.ToString();
 
