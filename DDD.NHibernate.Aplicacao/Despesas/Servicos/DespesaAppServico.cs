@@ -120,5 +120,31 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
             return resultado;
      
         }
+
+        public DespesaResponse AlterarValor(int id)
+        {
+            Despesa despesa = despesaServico.Validar(id);
+
+            double novoValor = despesa.ValorTotal* 1.10;
+
+            try
+            {
+                unitOfWork.BeginTransaction();
+
+                despesa.SetValorTotal(novoValor);
+
+                despesaRepositorio.Editar(despesa);
+
+                var resultado = mapper.Map<DespesaResponse>(despesa);
+
+                unitOfWork.Commit();
+                return resultado;
+            }
+            catch
+            {
+                unitOfWork.Rollback();
+                throw;
+            }
+        }
     }
 }

@@ -1,12 +1,10 @@
-﻿using DDD.NHibernate.Dominio.Despesas.Entidades;
+﻿using Dapper;
+using DDD.NHibernate.Dominio.Despesas.Entidades;
 using DDD.NHibernate.Dominio.Despesas.Repositorios;
 using DDD.NHibernate.Lib.NHibernate.Repositorios;
 using NHibernate;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DDD.NHibernate.Infra.Despesas.Repositorios
 {
@@ -14,6 +12,21 @@ namespace DDD.NHibernate.Infra.Despesas.Repositorios
     {
         public DespesaRepositorio(ISession session) : base(session) { }
 
+        public Despesa retornaDespesaPorId(int id)
+        {
+            var sql = @"select d.descricao, d.id, d.tipo, d.numpagamentos, d.valortotal 
+                        from despesa d 
+                        where id = @PID";
 
+            var parametros = new DynamicParameters();
+            parametros.Add("PID", id);
+
+            var comando = this.session.Connection.CreateCommand();
+            this.session.Flush();
+            this.session.Transaction.Enlist(comando);
+
+            var response = session.Connection.Query<Despesa>(sql, parametros, comando.Transaction).FirstOrDefault();
+            return response;
+        }
     }
 }

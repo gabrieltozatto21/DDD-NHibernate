@@ -49,7 +49,7 @@ namespace DDD.NHibernate.Infra.UsuariosAcesso.Repositorios
                 SigningCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature),
                 Subject = new ClaimsIdentity(claims),
                 NotBefore = dataCriacao,
-                Expires = dataExpiracao
+                Expires  = dataExpiracao
             };
 
             return handler.WriteToken(handler.CreateToken(securityToken)); ;

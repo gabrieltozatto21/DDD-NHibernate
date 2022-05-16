@@ -25,6 +25,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Teste", "Teste", "{CFBA70ED
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DDD.NHibernate.Dominio.Testes", "DDD.NHibernate.Dominio.Testes\DDD.NHibernate.Dominio.Testes.csproj", "{509D9403-A24B-4872-AACA-3FE706E8DEFA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servicos", "Servicos", "{37D8A9FE-B91E-4167-AC57-AEE3C8741F52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.Nhibernate.Jobs", "DDD.Nhibernate.Jobs\DDD.Nhibernate.Jobs.csproj", "{2525F12C-50C5-45D5-A6BC-57B32587B3E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{509D9403-A24B-4872-AACA-3FE706E8DEFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{509D9403-A24B-4872-AACA-3FE706E8DEFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{509D9403-A24B-4872-AACA-3FE706E8DEFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2525F12C-50C5-45D5-A6BC-57B32587B3E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2525F12C-50C5-45D5-A6BC-57B32587B3E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2525F12C-50C5-45D5-A6BC-57B32587B3E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2525F12C-50C5-45D5-A6BC-57B32587B3E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +74,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{7C2F9841-B8ED-470C-88F2-5A5C2E36268E} = {2A5274F3-C949-4743-9854-088729BDC868}
 		{509D9403-A24B-4872-AACA-3FE706E8DEFA} = {CFBA70ED-3246-4F5F-9B3D-598831FB43C7}
+		{2525F12C-50C5-45D5-A6BC-57B32587B3E2} = {37D8A9FE-B91E-4167-AC57-AEE3C8741F52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4200EB03-CCCE-4519-B05C-CC25511BF4D8}

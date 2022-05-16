@@ -1,4 +1,4 @@
-ï»¿using DDD.NHibernate.Libs.Core.Api.Hosting;
+using DDD.NHibernate.Libs.Core.Api.Hosting;
 using DDD.NHibernate.Libs.Core.Api.Logs;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -6,19 +6,17 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
 using System.IO;
-using Microsoft.Extensions.Hosting;
 
-namespace DDD.NHibernate.API
+namespace DDD.Nhibernate.Jobs
 {
     public class Program
     {
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-           .SetBasePath(Directory.GetCurrentDirectory())
-           .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-           .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
-           .AddEnvironmentVariables()
-           .Build();
-
+          .SetBasePath(Directory.GetCurrentDirectory())
+          .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+          .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
+          .AddEnvironmentVariables()
+          .Build();
         public static void Main(string[] args)
         {
             Log.Logger = new LoggerConfiguration()
@@ -27,7 +25,7 @@ namespace DDD.NHibernate.API
 
             try
             {
-                Log.Information("Iniciando aplicaÃ§Ã£o...");
+                Log.Information("Iniciando aplicação...");
 
                 BuildWebHost(args).Run();
             }
@@ -45,14 +43,14 @@ namespace DDD.NHibernate.API
         {
             var builder = WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseSerilog((provider, context, loggerConfiguration) =>
+                .UseConfiguration(Configuration)
+                .UseSerilog()
+                .ConfigureKestrel((context, options) =>
                 {
-                    loggerConfiguration
-                        .ReadFrom.Configuration(Configuration).Enrich.WithAspnetcoreHttpcontext(provider);
-                });
+                    options.AllowSynchronousIO = true;
+                }); ;
 
             return builder.Build();
         }
-
     }
 }
