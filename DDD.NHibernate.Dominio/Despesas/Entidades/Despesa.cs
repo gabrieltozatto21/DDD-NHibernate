@@ -11,14 +11,16 @@ namespace DDD.NHibernate.Dominio.Despesas.Entidades
         public virtual TipoDespesaEnum Tipo { get; set; }
         public virtual int NumPagamentos { get; set; }
         public virtual double ValorTotal { get; set; }
+        public virtual DateTime DataVencimento { get; set; }
 
         public Despesa(){ }
-        public Despesa(string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal)
+        public Despesa(string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal, DateTime dataVencimento)
         {
             SetDescricao(descricao);
             SetTipo(tipo);
             SetNumPagamentos(numPagamentos);
             SetValorTotal(valorTotal);
+            SetDataVencimento(dataVencimento);
         }
 
         public virtual void SetDescricao(string descricao)
@@ -33,6 +35,10 @@ namespace DDD.NHibernate.Dominio.Despesas.Entidades
         public virtual void SetTipo(TipoDespesaEnum tipo)
         {
             this.Tipo = tipo;
+        }
+        public virtual void SetDataVencimento(DateTime dataVencimento)
+        {
+            this.DataVencimento = dataVencimento;
         }
 
         public virtual void SetNumPagamentos(int numPagamentos)

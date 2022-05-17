@@ -19,6 +19,7 @@ namespace DDD.NHibernate.Dominio.UsuariosAcesso.Entidades
             Nome = nome;
             Email = email;
             Login = login;
+            DataCadastro = DateTime.Now;
         }
 
         public virtual void SetSenha(string senha)

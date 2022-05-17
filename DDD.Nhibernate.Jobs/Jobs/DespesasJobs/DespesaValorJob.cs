@@ -23,7 +23,7 @@ namespace DDD.Nhibernate.Jobs.Jobs.DespesasJobs
 
             string mensagem = dataMap.GetString("mensagem");
 
-            despesaAppServico.AlterarValor(1);
+            despesaAppServico.AplicaJuros();
 
             await Task.CompletedTask;
         }

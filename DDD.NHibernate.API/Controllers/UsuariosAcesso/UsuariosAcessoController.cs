@@ -28,7 +28,7 @@ namespace DDD.NHibernate.API.Controllers.UsuariosAcesso
         /// <param name="request"></param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public ActionResult<UsuarioAcessoResponse> CadastraUsuario([FromBody] UsuarioAcessoRequest request)
         {
             var response = usuariosAcessoAppServico.Cadastrar(request);

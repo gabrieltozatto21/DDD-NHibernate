@@ -50,7 +50,7 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
             {
                 unitOfWork.BeginTransaction();
 
-                Despesa despesa = despesaServico.Instanciar(request.Descricao, request.Tipo, request.NumPagamentos, request.ValorTotal);
+                Despesa despesa = despesaServico.Instanciar(request.Descricao, request.Tipo, request.NumPagamentos, request.ValorTotal, request.DataVencimento);
 
                 despesaRepositorio.Adicionar(despesa);
 
@@ -121,24 +121,17 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
      
         }
 
-        public DespesaResponse AlterarValor(int id)
-        {
-            Despesa despesa = despesaServico.Validar(id);
-
-            double novoValor = despesa.ValorTotal* 1.10;
-
+        public void AplicaJuros()
+        {  
             try
             {
                 unitOfWork.BeginTransaction();
 
-                despesa.SetValorTotal(novoValor);
+                IList<Despesa> despesasAtrasadas = this.despesaServico.AplicaJuros();
+                despesaRepositorio.Editar(despesasAtrasadas);
 
-                despesaRepositorio.Editar(despesa);
-
-                var resultado = mapper.Map<DespesaResponse>(despesa);
 
                 unitOfWork.Commit();
-                return resultado;
             }
             catch
             {
@@ -146,5 +139,6 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
                 throw;
             }
         }
+
     }
 }

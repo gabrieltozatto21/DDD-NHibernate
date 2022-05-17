@@ -41,5 +41,13 @@ namespace DDD.NHibernate.Lib.NHibernate.Repositorios
         {
             session.Update(entidade);
         }
+
+        public void Editar(IEnumerable<T> lista)
+        {
+            foreach (T entidade in lista)
+            {
+                session.Update(entidade);
+            }
+        }
     }
 }

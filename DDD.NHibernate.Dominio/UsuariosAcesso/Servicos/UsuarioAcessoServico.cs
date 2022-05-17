@@ -72,5 +72,6 @@ namespace DDD.NHibernate.Dominio.UsuariosAcesso.Servicos
 
             return usuario;
         }
+
     }
 }

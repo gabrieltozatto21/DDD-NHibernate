@@ -21,7 +21,7 @@ namespace DDD.NHibernate.Dominio.Testes.Despesas.Entidade
             [Fact]
             public void Quando_DespesaForInstanciada_Espero_ObjetoIntegro()
             {
-                Despesa despesa = new Despesa(sut.Descricao, sut.Tipo, sut.NumPagamentos, sut.ValorTotal);
+                Despesa despesa = new Despesa(sut.Descricao, sut.Tipo, sut.NumPagamentos, sut.ValorTotal, sut.DataVencimento);
 
                 despesa.Equals(sut);
 

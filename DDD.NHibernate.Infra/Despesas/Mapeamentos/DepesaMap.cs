@@ -17,6 +17,7 @@ namespace DDD.NHibernate.Infra.Despesas.Mapeamentos
             Map(d => d.Descricao).Column("Descricao");
             Map(d => d.Tipo).Column("Tipo");
             Map(d => d.NumPagamentos).Column("NumPagamentos");
+            Map(d => d.DataVencimento).Column("DataVencimento");
             Map(d => d.ValorTotal).Column("ValorTotal").Not.Nullable();
         }
     }

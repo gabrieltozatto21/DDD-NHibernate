@@ -13,6 +13,7 @@ namespace DDD.NHibernate.Infra.UsuariosAcesso.Mapeamentos
             Map(p => p.Login).Column("LOGIN");
             Map(p => p.Email).Column("EMAIL");
             Map(p => p.Senha).Column("SENHA");
+            Map(p => p.DataCadastro).Column("DataCadastro");
 
 
         }

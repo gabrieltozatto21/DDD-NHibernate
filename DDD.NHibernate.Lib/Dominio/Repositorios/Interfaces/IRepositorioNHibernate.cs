@@ -14,6 +14,7 @@ namespace DDD.NHibernate.Dominio.Libs.Repositorios
         T PesquisarPor(int id);
         void Adicionar(T entity);
         void Editar(T entidade);
+        void Editar(IEnumerable<T> lista);
         void Remover(T entity);
     }
 }

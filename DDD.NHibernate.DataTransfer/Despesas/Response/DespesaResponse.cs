@@ -12,5 +12,6 @@ namespace DDD.NHibernate.DataTransfer.Despesas.Response
         public TipoDespesaEnum Tipo { get; set; }
         public int NumPagamentos { get; set; }
         public double ValorTotal { get; set; }
+        public DateTime DataVencimento { get; set; }
     }
 }

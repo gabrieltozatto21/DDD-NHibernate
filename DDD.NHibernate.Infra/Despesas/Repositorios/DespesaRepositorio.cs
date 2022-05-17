@@ -3,6 +3,7 @@ using DDD.NHibernate.Dominio.Despesas.Entidades;
 using DDD.NHibernate.Dominio.Despesas.Repositorios;
 using DDD.NHibernate.Lib.NHibernate.Repositorios;
 using NHibernate;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,7 +15,7 @@ namespace DDD.NHibernate.Infra.Despesas.Repositorios
 
         public Despesa retornaDespesaPorId(int id)
         {
-            var sql = @"select d.descricao, d.id, d.tipo, d.numpagamentos, d.valortotal 
+            var sql = @"select d.descricao, d.id, d.tipo, d.numpagamentos, d.valortotal, d.DataVencimento 
                         from despesa d 
                         where id = @PID";
 
@@ -27,6 +28,14 @@ namespace DDD.NHibernate.Infra.Despesas.Repositorios
 
             var response = session.Connection.Query<Despesa>(sql, parametros, comando.Transaction).FirstOrDefault();
             return response;
+        }
+
+        public IQueryable<Despesa> VerificaDespesaVencimento()
+        {
+            IQueryable<Despesa> despesasVencida = this.ListarTodos()
+                .Where(d => d.DataVencimento < DateTime.Now);
+
+            return despesasVencida;
         }
     }
 }

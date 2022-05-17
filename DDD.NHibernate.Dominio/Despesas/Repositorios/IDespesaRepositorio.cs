@@ -11,5 +11,6 @@ namespace DDD.NHibernate.Dominio.Despesas.Repositorios
     public interface IDespesaRepositorio : IRepositorioNHibernate<Despesa>
     {
        Despesa retornaDespesaPorId(int id);
+       IQueryable<Despesa> VerificaDespesaVencimento();
     }
 }

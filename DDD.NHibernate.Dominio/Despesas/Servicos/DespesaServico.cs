@@ -32,9 +32,9 @@ namespace DDD.NHibernate.Dominio.Despesas.Servicos
             return despesa;
         }
 
-        public Despesa Instanciar(string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal)
+        public Despesa Instanciar(string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal, DateTime dataVencimento)
         {
-            Despesa despesa = new Despesa(descricao, tipo, numPagamentos, valorTotal);
+            Despesa despesa = new Despesa(descricao, tipo, numPagamentos, valorTotal, dataVencimento);
 
             return despesa;
         }
@@ -50,6 +50,19 @@ namespace DDD.NHibernate.Dominio.Despesas.Servicos
 
             return despesa;
 
+        }
+
+        public IList<Despesa> AplicaJuros()
+        {
+            IList<Despesa> despesasAtrasadas = this.despesaRepositorio.VerificaDespesaVencimento().ToList();
+
+            foreach(Despesa despesa in despesasAtrasadas)
+            {
+                double novoValor = despesa.ValorTotal * 1.10;
+                despesa.SetValorTotal(novoValor);
+            }
+
+            return despesasAtrasadas;
         }
     }
 }
