@@ -27,6 +27,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.HttpOverrides;
+using DDD.NHibernate.API.SignalR.Hubs;
+using System.Linq;
 
 namespace DDD.NHibernate.API
 {
@@ -129,6 +131,25 @@ namespace DDD.NHibernate.API
                 }
             );
 
+            services.AddCors(options =>
+            {
+                var corsUrls = configuration.GetSection("CorsOrigins").Value.ToString()
+                      .Split(",", StringSplitOptions.RemoveEmptyEntries)
+                             .Select(o => o.Trim('/'))
+                             .ToArray();
+
+                options.AddPolicy("CorsPolicy",
+                builder =>
+                {
+                    builder
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithOrigins(corsUrls)
+                    .AllowCredentials();
+                });
+            });
+
+            services.AddSignalR();
             services.AddScoped<ISession>(factory =>
                 {
                     return factory.GetService<ISessionFactory>().OpenSession();
@@ -168,11 +189,11 @@ namespace DDD.NHibernate.API
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(c =>
+            app.UseCors("CorsPolicy");
+
+            app.UseSignalR(cfg => 
             {
-                c.AllowAnyHeader();
-                c.AllowAnyMethod();
-                c.AllowAnyOrigin();
+                cfg.MapHub<NotificacaoHub>("/notificacao-hub");
             });
 
             app.UseForwardedHeaders(new ForwardedHeadersOptions
