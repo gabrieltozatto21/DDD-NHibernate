@@ -5,7 +5,11 @@ using DDD.NHibernate.DataTransfer.Despesas.Response;
 using DDD.NHibernate.Dominio.Despesas.Entidades;
 using DDD.NHibernate.Dominio.Despesas.Repositorios;
 using DDD.NHibernate.Dominio.Despesas.Servicos.Interfaces;
+using DDD.NHibernate.Dominio.Notificacoes.Servicos.Interfaces;
+using DDD.NHibernate.Dominio.UsuarioNotificacoes.Servicos.Interfaces;
+using DDD.NHibernate.Dominio.UsuariosAcesso.Servicos.Interfaces;
 using DDD.NHibernate.Libs.Aplicacao.Transacoes.Interfaces;
+using DDD.NHibernate.Libs.Core.Api.Usuarios.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,20 +22,31 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
     {
         private readonly IMapper mapper;
         private readonly IDespesaServico despesaServico;
+        private readonly INotificacoesServico notificacoesServico;
+        private readonly IUsuariosNotificacoesServico usuariosNotificacoesServico;
         private readonly IDespesaRepositorio despesaRepositorio;
         private readonly IUnitOfWork unitOfWork;
+        private readonly IUsuario usuario;
+        private readonly IUsuarioAcessoServico usuarioAcessoServico;
 
         public DespesaAppServico(
-            IDespesaServico despesaServico, 
-            IDespesaRepositorio despesaRepositorio, 
+            IDespesaServico despesaServico,
+            IDespesaRepositorio despesaRepositorio,
             IUnitOfWork unitOfWork,
-            IMapper mapper
-        )
+            IMapper mapper,
+            IUsuariosNotificacoesServico usuariosNotificacoesServico,
+            INotificacoesServico notificacoesServico,
+            IUsuario usuario,
+            IUsuarioAcessoServico usuarioAcessoServico)
         {
             this.mapper = mapper;
             this.unitOfWork = unitOfWork;
             this.despesaServico = despesaServico;
             this.despesaRepositorio = despesaRepositorio;
+            this.usuariosNotificacoesServico = usuariosNotificacoesServico;
+            this.notificacoesServico = notificacoesServico;
+            this.usuario = usuario;
+            this.usuarioAcessoServico = usuarioAcessoServico;
         }
         public IEnumerable<DespesaResponse> Listar()
         {
@@ -50,9 +65,18 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
             {
                 unitOfWork.BeginTransaction();
 
+                int idUsuario = Convert.ToInt32(this.usuario.Id);
+
+                //var usuario = usuarioAcessoServico.Validar(idUsuario);
+
                 Despesa despesa = despesaServico.Instanciar(request.Descricao, request.Tipo, request.NumPagamentos, request.ValorTotal, request.DataVencimento);
 
+                //despesa.SetUsuario(usuario);
+
                 despesaRepositorio.Adicionar(despesa);
+
+                //cria notificacao padrão para essa despesa
+                CriarNotificacaoParaUsuario(despesa);
 
                 var response = mapper.Map<DespesaResponse>(despesa);
 
@@ -61,7 +85,7 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
                 return response;
 
             }
-            catch
+            catch(Exception ex)
             {
                 unitOfWork.Rollback();
                 throw;
@@ -138,6 +162,29 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
                 unitOfWork.Rollback();
                 throw;
             }
+        }
+
+        public void CriarNotificacaoParaUsuario(Despesa despesa)
+        {
+            try
+            {
+                unitOfWork.BeginTransaction();
+
+                var notificacao = notificacoesServico.Instanciar(DateTime.Now, despesa.DataVencimento.AddDays(-1), despesa.Descricao, "", true, 1);
+                notificacoesServico.Inserir(notificacao);
+
+                var usuarioNotificacao = usuariosNotificacoesServico.Instanciar(4, notificacao.Id);
+                usuariosNotificacoesServico.Inserir(usuarioNotificacao);
+
+                unitOfWork.Commit();
+
+            }
+            catch
+            {
+                unitOfWork.Rollback();
+                throw;
+            }
+
         }
 
     }

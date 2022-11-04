@@ -29,6 +29,8 @@ using System.Text;
 using Microsoft.AspNetCore.HttpOverrides;
 using DDD.NHibernate.API.SignalR.Hubs;
 using System.Linq;
+using DDD.NHibernate.Libs.Core.Api.Usuarios;
+using DDD.NHibernate.Libs.Core.Api.Usuarios.Interfaces;
 
 namespace DDD.NHibernate.API
 {
@@ -156,7 +158,7 @@ namespace DDD.NHibernate.API
                 }
             );
 
-           
+            services.AddScoped<IUsuario, AspNetUser>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddAutoMapper(typeof(DespesaProfile).GetTypeInfo().Assembly);
 

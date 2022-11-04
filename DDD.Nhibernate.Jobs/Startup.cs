@@ -1,6 +1,7 @@
 using AutoMapper;
 using CrystalQuartz.AspNetCore;
 using DDD.Nhibernate.Jobs.Jobs.DespesasJobs;
+using DDD.Nhibernate.Jobs.Jobs.NotificacaoJob;
 using DDD.NHibernate.Aplicacao.Despesas.Profiles;
 using DDD.NHibernate.Aplicacao.Despesas.Servicos;
 using DDD.NHibernate.Dominio.Despesas.Servicos;
@@ -59,6 +60,9 @@ namespace DDD.Nhibernate.Jobs
 
                 var despesaValorJob = JobBuilder.Create<DespesaValorJob>().WithIdentity("DespesaValorJob", "Despesa").WithDescription("Executa a alteração de valor da despesa").StoreDurably().Build();
                 scheduler.ScheduleJob(despesaValorJob, TriggerBuilder.Create().WithCronSchedule("20 0 0 ? * * *").Build());
+
+                var notificacaoJob = JobBuilder.Create<NotificacaoJob>().WithIdentity("NotificacaoJov", "Notificacao").WithDescription("Verifica se há notificacao pendente").StoreDurably().Build();
+                scheduler.ScheduleJob(notificacaoJob, TriggerBuilder.Create().WithCronSchedule("20 0 0 ? * * *").Build());
 
                 scheduler.Start();
 

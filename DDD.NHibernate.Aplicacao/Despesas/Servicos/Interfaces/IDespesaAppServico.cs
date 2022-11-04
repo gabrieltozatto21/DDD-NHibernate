@@ -17,5 +17,6 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos.Interfaces
         DespesaResponse Editar(int id, DespesaEditarRequest request);
         void Excluir(int id);
         void AplicaJuros();
+        void CriarNotificacaoParaUsuario(Despesa despesa);
     }
 }

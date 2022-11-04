@@ -1,5 +1,6 @@
 ﻿using System;
 using DDD.NHibernate.Dominio.Despesas.Entidades.Enumeradores;
+using DDD.NHibernate.Dominio.UsuariosAcesso.Entidades;
 using DDD.NHibernate.Libs.Dominio.Excecoes;
 
 namespace DDD.NHibernate.Dominio.Despesas.Entidades
@@ -12,6 +13,7 @@ namespace DDD.NHibernate.Dominio.Despesas.Entidades
         public virtual int NumPagamentos { get; set; }
         public virtual double ValorTotal { get; set; }
         public virtual DateTime DataVencimento { get; set; }
+        public virtual UsuarioAcesso Usuario { get; set; }
 
         public Despesa(){ }
         public Despesa(string descricao, TipoDespesaEnum tipo, int numPagamentos, double valorTotal, DateTime dataVencimento)
@@ -49,6 +51,11 @@ namespace DDD.NHibernate.Dominio.Despesas.Entidades
         public virtual void SetValorTotal(double valorTotal)
         {
             this.ValorTotal = valorTotal;
+        }
+
+        public virtual void SetUsuario(UsuarioAcesso usuario)
+        {
+            this.Usuario = usuario;
         }
     }
 }

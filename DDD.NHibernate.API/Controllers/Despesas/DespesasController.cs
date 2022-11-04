@@ -2,6 +2,7 @@
 using DDD.NHibernate.DataTransfer.Despesas.Request;
 using DDD.NHibernate.DataTransfer.Despesas.Response;
 using DDD.NHibernate.Dominio.Despesas.Entidades;
+using DDD.NHibernate.Libs.Core.Api.Usuarios.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -37,7 +38,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [Authorize]
+        //[Authorize]
         public ActionResult<Despesa> CadastrarDespesa([FromBody] DespesaInserirRequest request)
         {
             var response = despesaAppServico.Inserir(request);
