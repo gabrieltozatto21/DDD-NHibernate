@@ -92,6 +92,8 @@ namespace DDD.Nhibernate.Jobs
             }
             );
 
+            services.AddSignalRCore();
+            services.AddSignalR();
             services.AddScoped<ISession>(factory =>
             {
                 return factory.GetService<ISessionFactory>().OpenSession();

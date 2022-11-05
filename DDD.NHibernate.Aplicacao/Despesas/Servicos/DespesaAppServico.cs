@@ -67,11 +67,11 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
 
                 int idUsuario = Convert.ToInt32(this.usuario.Id);
 
-                //var usuario = usuarioAcessoServico.Validar(idUsuario);
+                var usuario = usuarioAcessoServico.Validar(idUsuario);
 
                 Despesa despesa = despesaServico.Instanciar(request.Descricao, request.Tipo, request.NumPagamentos, request.ValorTotal, request.DataVencimento);
 
-                //despesa.SetUsuario(usuario);
+                despesa.SetUsuario(usuario);
 
                 despesaRepositorio.Adicionar(despesa);
 
@@ -173,7 +173,7 @@ namespace DDD.NHibernate.Aplicacao.Despesas.Servicos
                 var notificacao = notificacoesServico.Instanciar(DateTime.Now, despesa.DataVencimento.AddDays(-1), despesa.Descricao, "", true, 1);
                 notificacoesServico.Inserir(notificacao);
 
-                var usuarioNotificacao = usuariosNotificacoesServico.Instanciar(4, notificacao.Id);
+                var usuarioNotificacao = usuariosNotificacoesServico.Instanciar(despesa.Usuario.Id, notificacao.Id);
                 usuariosNotificacoesServico.Inserir(usuarioNotificacao);
 
                 unitOfWork.Commit();

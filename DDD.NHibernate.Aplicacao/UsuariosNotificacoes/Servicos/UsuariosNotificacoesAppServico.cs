@@ -35,7 +35,7 @@ namespace DDD.NHibernate.Aplicacao.UsuariosNotificacoes.Servicos
             var usuariosNotificacoes = usuariosNotificacoesRepositorio.ListarTodos()
                 .Where(s => !s.Visualizado)
                 //.Where(x => (x.Notificacao.DataExibicao <= DateTime.Now || x.Notificacao.DataExibicao == null) && x.Notificacao.Ativo)
-                .Where(x => (x.Notificacao.DataExibicao == DateTime.Now || x.Notificacao.DataExibicao == null) && x.Notificacao.Ativo)
+                .Where(x => (x.Notificacao.DataExibicao <= DateTime.Now || x.Notificacao.DataExibicao == null) && x.Notificacao.Ativo)
                 .ToList();
 
             foreach (UsuarioNotificacao usuarioNotificacao in usuariosNotificacoes)

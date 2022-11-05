@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DDD.NHibernate.API.SignalR.Hubs
 {
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class NotificacaoHub : Hub
     {
         public override Task OnConnectedAsync()

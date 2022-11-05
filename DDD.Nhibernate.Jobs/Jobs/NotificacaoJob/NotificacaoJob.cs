@@ -48,16 +48,17 @@ namespace DDD.Nhibernate.Jobs.Jobs.NotificacaoJob
                     if (autenticacao != null)
                     {
                         HubConnection connection = new HubConnectionBuilder()
-                        .WithUrl($"{configuration.GetSection("SignalR:Hub").Value}")
+                        .WithUrl($"{configuration.GetSection("SignalR:Hub").Value}", options =>
+                        {
+                            options.AccessTokenProvider = () => Task.FromResult(autenticacao.Jwt);
+                        })
                         .Build();
 
-                        var t = connection.StartAsync();
-                        t.Wait();
+                        connection.StartAsync().Wait();
 
                         await usuariosNotificacoesAppServico.DispararNotificacoes(connection);
 
-                        var t3 = connection.StopAsync();
-                        t3.Wait();
+                        connection.StopAsync().Wait();
                     }
                 }
                 catch (Exception ex)

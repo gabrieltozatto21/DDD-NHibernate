@@ -38,7 +38,7 @@ namespace DDD.NHibernate.API.Controllers.Despesas
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         public ActionResult<Despesa> CadastrarDespesa([FromBody] DespesaInserirRequest request)
         {
             var response = despesaAppServico.Inserir(request);
