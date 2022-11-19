@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using DDD.NHibernate.Dominio.UsuariosAcesso.Servicos.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
 using System;
@@ -9,6 +10,13 @@ namespace DDD.NHibernate.API.SignalR.Hubs
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class NotificacaoHub : Hub
     {
+        private readonly IUsuarioAcessoServico usuarioAcessoServico;
+
+        public NotificacaoHub(IUsuarioAcessoServico usuarioAcessoServico)
+        {
+            this.usuarioAcessoServico = usuarioAcessoServico;
+        }
+
         public override Task OnConnectedAsync()
         {
             return base.OnConnectedAsync();
@@ -27,7 +35,7 @@ namespace DDD.NHibernate.API.SignalR.Hubs
         {
             if (!string.IsNullOrWhiteSpace(connectionId))
             {
-                await Clients.Client(connectionId).SendAsync("Notificar", mensagem);
+                await Clients.User(connectionId).SendAsync("Notificar", mensagem);
             }
         }
     }

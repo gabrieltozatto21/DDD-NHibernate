@@ -12,6 +12,7 @@ namespace DDD.NHibernate.Dominio.UsuariosAcesso.Entidades
         public virtual string Senha { get; protected set; }
         public virtual string Login { get; protected set; }
         public virtual DateTime DataCadastro { get; protected set; }
+        public virtual string ConnectionsIds { get; protected set; }
 
         public UsuarioAcesso() { }
         public UsuarioAcesso(string nome, string email, string login)
@@ -25,6 +26,11 @@ namespace DDD.NHibernate.Dominio.UsuariosAcesso.Entidades
         public virtual void SetSenha(string senha)
         {
             this.Senha = senha;
+        }
+
+        public virtual void SetConnectionsIds(List<string>connectionsIds, string ConnectionId)
+        {
+            
         }
     }
 }

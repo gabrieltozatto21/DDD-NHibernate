@@ -14,7 +14,7 @@ namespace DDD.NHibernate.Dominio.Notificacoes.Entidades
         public virtual string Link { get; protected set; }
         public virtual bool Ativo { get; protected set; }
         public virtual int Tipo { get; protected set; } //enum
-        public virtual IList<UsuarioNotificacao> UsuarioNotificacoes { get; protected set; }
+        //public virtual IList<UsuarioNotificacao> UsuarioNotificacoes { get; protected set; }
 
         protected Notificacao()
         {

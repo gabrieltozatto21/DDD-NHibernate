@@ -13,10 +13,10 @@ namespace DDD.NHibernate.Infra.UsuariosNotificacoes.Mapeamentos
 
             Id(n => n.Id).Column("ID").GeneratedBy.Identity();
 
-            References(x => x.Usuario, "USUARIO");
-            References(x => x.Notificacao, "NOTIFICACAO");
+            References(x => x.Usuario).Column("USUARIO");
+            References(x => x.Notificacao).Column("NOTIFICACAO");
+            Map(x => x.Notificado).Column("NOTIFICADO").CustomType<bool>();
             Map(x => x.Visualizado).Column("VISUALIZADO").CustomType<BooleanType>();
-
 
         }
     }

@@ -3,6 +3,8 @@ using DDD.NHibernate.Dominio.UsuariosAcesso.Excecoes;
 using DDD.NHibernate.Dominio.UsuariosAcesso.Repositorios;
 using DDD.NHibernate.Dominio.UsuariosAcesso.Servicos.Interfaces;
 using DDD.NHibernate.Libs.Dominio.Excecoes;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DDD.NHibernate.Dominio.UsuariosAcesso.Servicos
@@ -71,6 +73,22 @@ namespace DDD.NHibernate.Dominio.UsuariosAcesso.Servicos
             }
 
             return usuario;
+        }
+
+        public void AdicionarConnectionId(int id, string connectionId)
+        {
+            UsuarioAcesso usuario = usuarioAcessoRepositorio.PesquisarPor(id);
+
+            if(usuario.ConnectionsIds != null)
+            {
+                List<string> connectionsIds = JsonConvert.DeserializeObject<List<string>>(usuario.ConnectionsIds);
+
+                if (connectionsIds.Contains(connectionId))
+                {
+                    connectionsIds.Add(connectionId);
+                }
+            }
+
         }
 
     }

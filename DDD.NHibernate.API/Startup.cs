@@ -31,6 +31,8 @@ using DDD.NHibernate.API.SignalR.Hubs;
 using System.Linq;
 using DDD.NHibernate.Libs.Core.Api.Usuarios;
 using DDD.NHibernate.Libs.Core.Api.Usuarios.Interfaces;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace DDD.NHibernate.API
 {
@@ -65,7 +67,12 @@ namespace DDD.NHibernate.API
             {
                 config.Filters.Add<ExcecaoFilter>();
             })
+            .AddJsonOptions(opt =>
+            {
+                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            })
             .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
 
             services.AddSwaggerGen(c =>
             {

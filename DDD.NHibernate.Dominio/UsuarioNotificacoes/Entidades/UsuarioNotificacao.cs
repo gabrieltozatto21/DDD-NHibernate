@@ -11,6 +11,7 @@ namespace DDD.NHibernate.Dominio.UsuarioNotificacoes.Entidades
         public virtual int Id { get; protected set; }
         public virtual UsuarioAcesso Usuario { get; protected set; }
         public virtual Notificacao Notificacao { get; protected set; }
+        public virtual bool Notificado { get; protected set; }
         public virtual bool Visualizado { get; protected set; }
 
         protected UsuarioNotificacao()
@@ -27,6 +28,11 @@ namespace DDD.NHibernate.Dominio.UsuarioNotificacoes.Entidades
         public virtual void SetVisualizado(bool visualizado)
         {
             this.Visualizado = visualizado;
+        }
+
+        public virtual void SetNotificado(bool notificado)
+        {
+            this.Notificado = notificado;
         }
     }
 }

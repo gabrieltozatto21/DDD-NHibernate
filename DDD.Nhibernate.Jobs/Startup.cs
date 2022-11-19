@@ -60,9 +60,10 @@ namespace DDD.Nhibernate.Jobs
 
                 var despesaValorJob = JobBuilder.Create<DespesaValorJob>().WithIdentity("DespesaValorJob", "Despesa").WithDescription("Executa a alteração de valor da despesa").StoreDurably().Build();
                 scheduler.ScheduleJob(despesaValorJob, TriggerBuilder.Create().WithCronSchedule("20 0 0 ? * * *").Build());
+                scheduler.PauseJob(despesaValorJob.Key);
 
                 var notificacaoJob = JobBuilder.Create<NotificacaoJob>().WithIdentity("NotificacaoJov", "Notificacao").WithDescription("Verifica se há notificacao pendente").StoreDurably().Build();
-                scheduler.ScheduleJob(notificacaoJob, TriggerBuilder.Create().WithCronSchedule("20 0 0 ? * * *").Build());
+                scheduler.ScheduleJob(notificacaoJob, TriggerBuilder.Create().WithCronSchedule("0 0/1 * 1/1 * ? *").Build());
 
                 scheduler.Start();
 

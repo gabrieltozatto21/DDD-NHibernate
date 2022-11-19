@@ -18,7 +18,7 @@ namespace DDD.NHibernate.Infra.Notificacoes.Mapeamentos
             Map(n => n.Link).Column("DESCLINK");
             Map(n => n.Tipo).Column("TIPO");
             Map(x => x.Ativo).Column("ATIVO").CustomType<BooleanType>();
-            HasMany(n => n.UsuarioNotificacoes).Table("USUARIONOTIFICACAO");
+            //HasMany(n => n.UsuarioNotificacoes).Table("USUARIONOTIFICACAO").Cascade.All().Inverse();
         }
     }
 }
